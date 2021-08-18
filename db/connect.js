@@ -3,6 +3,7 @@ let conn = null;
 const connectDB = async () => {
 	if (conn == null) {
 		// Use new db connection
+		// eslint-disable-next-line no-undef
 		conn = mongoose.connect(process.env.mongodburl, {
 			useUnifiedTopology: true,
 			useFindAndModify: false,

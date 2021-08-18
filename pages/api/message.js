@@ -7,6 +7,7 @@ const handler = async (req, res) => {
 		const Message = modelMessage(conn);
 		const { content } = req.body;
 		const mes = await Message.createEncryptedMessage(content);
+		// eslint-disable-next-line no-undef
 		return res.status(200).send(`https://${process.env.CLIENT_HOST}/message/${mes.iv}?key=${mes.key}`);
 	}
 };
