@@ -1,5 +1,7 @@
 import Message from '../../db/models/note';
 import { Container } from '@chakra-ui/react';
+import connectDB from '../../db/connect';
+import modelMessage from '../../db/models/note';
 
 const DecryptedMessage = ({ decryptedMessage, error }) => {
 	if (decryptedMessage) {
@@ -29,6 +31,8 @@ export const getServerSideProps = async (context) => {
 	const { key, id } = context.query;
 	let error, decryptedMessage = null;
 	try {
+		const conn = await connectDB();
+		const Message = modelMessage(conn);
 		decryptedMessage = await Message.decrypt(id, key);
 	} catch (e) {
 		console.log('ssss', e)

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
+import connectDB from '../../db/connect';
 
 //Encrypting text
 function encrypt(text) {
@@ -17,6 +18,7 @@ function encrypt(text) {
 
 // Decrypting text
 function decrypt(iv, key, encryptedData) {
+	
 	iv = Buffer.from(iv, 'hex');
 	key = Buffer.from(key, 'hex');
 	const encryptedText = Buffer.from(encryptedData, 'hex');
@@ -36,16 +38,14 @@ const messageSchema = new Schema({
 		type: String,
 		required: true
 	},
-	user: {
-		type: mongoose.Types.ObjectId,
-	},
 }, {
 	timestamps: true,
 });
 
 messageSchema.statics.createEncryptedMessage = async function (content)  {
+	const conn = await connectDB();
 	const { key, iv, encryptedData } = encrypt(content);
-	await Message.create({
+	await modelMessage(conn).create({
 		iv: iv,
 		content: encryptedData
 	});
@@ -54,8 +54,9 @@ messageSchema.statics.createEncryptedMessage = async function (content)  {
 
 messageSchema.statics.decrypt = async function (iv, key)  {
 	try {
-		const message = await Message.findOne({ iv });
-		await Message.findByIdAndDelete(message._id);
+		const conn = await connectDB();
+		const message = await modelMessage(conn).findOne({ iv });
+		await modelMessage(conn).findByIdAndDelete(message._id);
 		return decrypt(iv, key, message.content);
 	} catch (e) {
 		console.log(e)
@@ -64,6 +65,9 @@ messageSchema.statics.decrypt = async function (iv, key)  {
 
 }
 
-const Message = mongoose.models['Message'] || mongoose.model('Message', messageSchema);
+const modelName = 'Message';
+const modelMessage = (conn) => {
+	return conn.models[modelName] || conn.model(modelName, messageSchema);
+}
 
-export default Message;
+export default modelMessage;
