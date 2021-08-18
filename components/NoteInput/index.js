@@ -9,10 +9,12 @@ const NoteInput = () => {
 	const [message, setMessage] = useState('');
 	const [view, setView] = useState('note');
 	const [link, setLink] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 	const createMessageHandler = async (e) => {
 		e.preventDefault();
+		setIsLoading(true)
 		const res = await createMessage(message);
-		console.log(res.data);
+		setIsLoading(false);
 		setView('link');
 		setLink(res.data)
 	}
@@ -32,6 +34,8 @@ const NoteInput = () => {
 				color={'white'}
 				padding={'20px'}
 				marginTop={'10px'}
+				isLoading={isLoading}
+				loadingText={'Creating...'}
 				onClick={() => {
 					setView('note');
 					setLink('');

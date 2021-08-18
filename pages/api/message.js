@@ -7,7 +7,7 @@ const handler = async (req, res) => {
 		const Message = modelMessage(conn);
 		const { content } = req.body;
 		const mes = await Message.createEncryptedMessage(content);
-		return res.status(200).send(`http://localhost:3000/message/${mes.iv}?key=${mes.key}`);
+		return res.status(200).send(`https://${process.env.CLIENT_HOST}/message/${mes.iv}?key=${mes.key}`);
 	}
 };
 
