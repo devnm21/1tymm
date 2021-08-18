@@ -1,4 +1,3 @@
-import Message from '../../db/models/note';
 import { Container } from '@chakra-ui/react';
 import connectDB from '../../db/connect';
 import modelMessage from '../../db/models/note';
