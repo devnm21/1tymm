@@ -9,10 +9,15 @@ const NoteInput = () => {
 	const [message, setMessage] = useState('');
 	const [view, setView] = useState('note');
 	const [link, setLink] = useState('');
+	const [copyButtonText, setCopyButtonText] = useState('Copy');
 	const [isLoading, setIsLoading] = useState(false);
+	const wait = () => new Promise((resolve) => {
+		setTimeout(() => resolve(), 3000)
+	});
 	const createMessageHandler = async (e) => {
 		e.preventDefault();
 		setIsLoading(true)
+		await wait();
 		const res = await createMessage(message);
 		setIsLoading(false);
 		setView('link');
@@ -20,7 +25,7 @@ const NoteInput = () => {
 	}
 	if (view === 'link' && link) {
 		return <>
-			<Container css={{ marginTop: '200px', marginBottom: '80px' }} backgroundColor={'red.100'} >
+			<Container css={{ marginTop: '200px', marginBottom: '80px', padding: '20px' }} backgroundColor={'red.100'} >
 				<Link marginLeft={'10px'}
 				      color={'purple.800'}
 				      textDecoration={'underline'}
@@ -28,13 +33,25 @@ const NoteInput = () => {
 					{link}
 				<ExternalLinkIcon mx="2px" />
 				</Link>
+				<Button
+					display={'block'}
+					backgroundColor={'purple'}
+					bgColor={'green.400'}
+					margin={'5px'}
+					onClick={() => {
+						navigator.clipboard.writeText(link);
+						setCopyButtonText('Copied')
+						}
+					}
+				>
+					{copyButtonText}
+				</Button>
 			</Container>
 			<Button
 				backgroundColor={'purple'}
 				color={'white'}
 				padding={'20px'}
 				marginTop={'10px'}
-				isLoading={isLoading}
 				loadingText={'Creating...'}
 				onClick={() => {
 					setView('note');
@@ -54,6 +71,9 @@ const NoteInput = () => {
 			color={'white'}
 			padding={'20px'}
 			marginTop={'10px'}
+			isLoading={isLoading}
+			colorScheme="teal"
+			variant="outline"
 			_hover={{ backgroundColor: 'blue' }} >
 			Create
 		</Button>

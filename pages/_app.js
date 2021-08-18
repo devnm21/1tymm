@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   >
     <ChakraProvider>
       <Navbar />
-      <div style={{ marginTop: '100px'}}>
+      <div style={{ marginTop: '8em'}}>
         <Component {...pageProps} />
       </div>
     </ChakraProvider>

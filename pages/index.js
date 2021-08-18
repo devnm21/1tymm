@@ -11,13 +11,13 @@ export default function Home() {
         <title>1tymm</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container maxWidth={'50%'} >
+      <Container >
         <NoteInput />
         <Heading as={'h3'}>With an account you can:</Heading>
         <UnorderedList>
-          <ListItem>Keep track of your intact messages</ListItem>
-          <ListItem>Attach images to your messages</ListItem>
-          <ListItem>Mail directly from 1tymm</ListItem>
+          <ListItem>Keep track of your intact messages (coming soon)</ListItem>
+          <ListItem>Attach images to your messages (coming soon)</ListItem>
+          <ListItem>Mail directly from 1tymm (coming soon)</ListItem>
         </UnorderedList>
         <LoginButton />
       </Container>
