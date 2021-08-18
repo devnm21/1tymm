@@ -53,9 +53,15 @@ messageSchema.statics.createEncryptedMessage = async function (content)  {
 }
 
 messageSchema.statics.decrypt = async function (iv, key)  {
-	const message = await Message.findOne({ iv });
-	console.log({iv, key, message})
-	return decrypt(iv, key, message.content);
+	try {
+		const message = await Message.findOne({ iv });
+		await Message.findByIdAndDelete(message._id);
+		return decrypt(iv, key, message.content);
+	} catch (e) {
+		console.log(e)
+		throw new Error('Decryption Failed')
+	}
+
 }
 
 const Message = mongoose.models['Message'] || mongoose.model('Message', messageSchema);

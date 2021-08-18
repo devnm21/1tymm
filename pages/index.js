@@ -12,8 +12,7 @@ export default function Home() {
         <title>1tymm</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
-      <Container marginTop={'100px'} maxWidth={'50%'} >
+      <Container maxWidth={'50%'} >
         <NoteInput />
         <Heading as={'h3'}>With an account you can:</Heading>
         <UnorderedList>

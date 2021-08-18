@@ -1,6 +1,7 @@
 import 'tailwindcss/tailwind.css'
 import { Auth0Provider } from "@auth0/auth0-react";
 import { ChakraProvider } from "@chakra-ui/react"
+import Navbar from '../components/Navbar';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,7 +12,10 @@ function MyApp({ Component, pageProps }) {
     // useRefreshTokens={true}
   >
     <ChakraProvider>
-    <Component {...pageProps} />
+      <Navbar />
+      <div style={{ marginTop: '100px'}}>
+        <Component {...pageProps} />
+      </div>
     </ChakraProvider>
     </Auth0Provider>
   )
