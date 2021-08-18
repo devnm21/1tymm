@@ -10,7 +10,7 @@ const NoteInput = () => {
 	const [view, setView] = useState('note');
 	const [link, setLink] = useState('');
 	const createMessageHandler = async (e) => {
-		e.preventDefault()
+		e.preventDefault();
 		const res = await createMessage(message);
 		console.log(res.data);
 		setView('link');

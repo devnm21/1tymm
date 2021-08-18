@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import Message from '../../db/models/note';
 import { Container } from '@chakra-ui/react';
 
@@ -19,7 +18,7 @@ const DecryptedMessage = ({ decryptedMessage, error }) => {
 	}
 	return <>
 		<Container centerContent >
-			<p>Couldn't decrypt/find message</p>
+			<p>Couldn&apos;t decrypt/find message</p>
 			Error : {error}
 		</Container>
 	</>

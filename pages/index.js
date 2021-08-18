@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import LoginButton from '../components/Auth0Login';
-import Navbar from '../components/Navbar';
 import NoteInput from '../components/NoteInput';
 import { Heading, UnorderedList, ListItem } from '@chakra-ui/react'
 import {Container} from '@chakra-ui/react';

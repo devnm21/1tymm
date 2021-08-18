@@ -18,5 +18,8 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "react/prop-types": "off",
+        "no-mixed-spaces-and-tabs": "off",
+        "react/react-in-jsx-scope": "off",
     }
 };
