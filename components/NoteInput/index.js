@@ -11,17 +11,15 @@ const NoteInput = () => {
 	const [link, setLink] = useState('');
 	const [copyButtonText, setCopyButtonText] = useState('Copy');
 	const [isLoading, setIsLoading] = useState(false);
-	const wait = () => new Promise((resolve) => {
-		setTimeout(() => resolve(), 3000)
-	});
+
 	const createMessageHandler = async (e) => {
 		e.preventDefault();
 		setIsLoading(true)
-		await wait();
 		const res = await createMessage(message);
 		setIsLoading(false);
 		setView('link');
-		setLink(res.data)
+		const { iv, key } = res.data;
+		setLink(`https://${window.location.host}/message/${iv}?key=${key}`)
 	}
 	if (view === 'link' && link) {
 		return <>
