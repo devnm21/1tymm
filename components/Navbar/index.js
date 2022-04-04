@@ -1,17 +1,17 @@
-import {  Container } from '@chakra-ui/react'
+import {  Container, Text } from '@chakra-ui/react'
 const Navbar = () => {
 	return <>
 		<Container
 			maxHeight={"md"}
-			backgroundColor={'red.200'}
+			backgroundColor={'darkmagenta'}
 			maxWidth={'full'}
 			type={'telegram'}
 			centerContent
 			css={{ position: 'fixed', top: 0, zIndex: 1   }}>
-			<img className={'mx-auto rounded-full py-1 px-4'} src={'/privnote-logo.svg'} alt={'logo'} />
-			<p>
+			<img width={'250px'} className={'mx-auto rounded-full py-1 px-4'} src={'/1tymm-logo.png'} alt={'logo'} />
+			<Text fontSize={'2xl'} color={'#fff'}>
 				Share encrypted messages to anyone which self-destruct themselves after being read
-			</p>
+			</Text>
 		</Container>
 	</>
 }
